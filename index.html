@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<script src="js/howler.core.min.js"></script>
+<script src="js/components.js"></script>
+<script src="js/createenemy.js"></script>
+<script src="js/createtower.js"></script>
+<script src="js/game.js"></script>
+<script src="js/pathlist.js"></script>
+<head>
+    <meta charset="UTF-8">
+    <title>杀虫</title>
+    
+</head>
+<body>
+    <canvas id="canvas" width="900" height="600"style=" position: fixed;left:0px; top:0px">
+        你的浏览器都旧得生蛆了，不用螳螂大军入侵都自己爆破了！赶紧去大脑升级罢！
+    </canvas>
+    <div id = "introText" style="background-color:brown; color:gold;  position: fixed;left:250px; top:150px; text-align: center;font-size:40px">
+        抵抗螳螂大军的入侵！<br>批里批里，Fuck cup！</div>
+    <div id="divStart" style="width:250px; height:30px; position: fixed; left:300px; top:400px;text-align: center">
+        <button id = "buttonStart" style="width:250px; height:80px;font-size:24px">开始守护二刺螈</button>
+    </div>
+    
+    <div id="divInfo" style="background-color:gold; width:200px; height:100px; position: fixed; left:700px; top:60px;text-align: center;font-size:20px;font-weight:bold">
+            <div id ="roundText">波数：0</div>
+            <div id ="cashText">批币：0</div>
+            <div id ="hpText">节肏：0</div>
+    </div>
+    <div id="divTowerCreate" style="background-color:lavenderblush; width:160px; height:180px; position: fixed; left:720px; top:200px;text-align: center;font-size:20px;font-weight:bold">
+        创建守护者<br>1000批币/个<br>
+        <button id = "buttonTA" style="width:80px; height:30px;">战狼</button><br>
+        <button id = "buttonTB" style="width:80px; height:30px;">金猴</button><br>
+        <button id = "buttonTC" style="width:80px; height:30px;">舔狗</button><br>
+        <button id = "buttonTN" style="width:80px; height:30px;">取消</button>
+    </div>
+    <div id = "gameOver" style="background-color:darkslateblue; color:lavender;  position: fixed;left:200px; top:200px; text-align: center;font-size:40px;visibility:hidden">
+        再接再厉！来世再入二刺螈！
+        <div id ="scoreText">分数：0</div>
+    </div>
+</body>
+<script>
+    //import Howl from 'js/howler';
+
+    var btnTowerState = -1;
+    var drawSelection = false;
+    var selectX, selectY;
+    var selectedLot = null;
+    
+    var buttonStart = document.getElementById("buttonStart");
+    var buttonTA = document.getElementById("buttonTA");
+    var buttonTB = document.getElementById("buttonTB");
+    var buttonTC = document.getElementById("buttonTC");
+    var buttonTN = document.getElementById("buttonTN");
+
+    var introText = document.getElementById("introText");
+    var divStart = document.getElementById("divStart");
+    var roundText = document.getElementById("roundText");
+    var cashText = document.getElementById("cashText");
+    var hpText = document.getElementById("hpText");
+    var divEnd = document.getElementById("gameOver");
+    var scoreText = document.getElementById("scoreText");
+
+    buttonStart.onclick = function(ev){buttonStartAction()};
+    buttonTA.onclick = function(ev){setBtnState(1)};
+    buttonTB.onclick = function(ev){setBtnState(2)};
+    buttonTC.onclick = function(ev){setBtnState(3)};
+    buttonTN.onclick = function(ev){setBtnState(0)};
+
+    main();
+    checkBtnState();
+    function buttonStartAction(){
+        //console.log("Go!!!");
+        divStart.style.visibility="hidden";
+        introText.style.visibility="hidden";
+        divEnd.style.visibility="hidden";
+        startGame();
+        /*createTowerA(330,330);
+        createTowerA(210,90);
+        createTowerA(510,510);
+        createTowerA(510,210);*/
+        setBtnState(0);
+    }
+
+    function setBtnState(n)
+    {
+        btnTowerState = n;
+        checkBtnState();
+    }
+
+    function checkBtnState()
+    {
+        if(btnTowerState == -1)
+        {
+            buttonTA.disabled = true;
+            buttonTB.disabled = true;
+            buttonTC.disabled = true;
+            buttonTN.disabled = true;
+        }
+        else if(btnTowerState == 0)
+        {
+            buttonTA.disabled = false;
+            buttonTB.disabled = false;
+            buttonTC.disabled = false;
+            buttonTN.disabled = true;
+        }
+        else
+        {
+            buttonTA.disabled = false;
+            buttonTB.disabled = false;
+            buttonTC.disabled = false;
+            buttonTN.disabled = false;
+        }
+    }
+
+
+</script>
+</html>
